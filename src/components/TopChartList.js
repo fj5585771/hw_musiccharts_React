@@ -1,19 +1,38 @@
 import React from "react";
-import HitDetails from "./HitDetails";
+import Hit from "./Hit";
+import {
+    Grid, List
+} from 'semantic-ui-react';
 
-const TopChartList = ({ hit }) => {
 
-    const hitNodes = hit.map((hit) => {
-        return <HitDetails hit={hit}/>
+const TopChartList = ({ songs, handlePlayPause }) => {
+
+    if (!songs) return null;
+
+    const hitNodes = songs.map((song, index) => {
+
+    return  <List.Item>
+                <Hit 
+                key={index}
+                song={song} 
+                audio={song.link[1].attributes.href} 
+                handlePlayPause={handlePlayPause}  
+                />
+            </List.Item>
+            
+
     });
+
 
     return (
         <>
-            <p> Top Chart List </p>
-                <ul>
-                    {hitNodes}
-
-                </ul>
+        {/* <Grid container columns={3}> */}
+        <List horizontal ordered>
+            {/* <ol> */}
+                {hitNodes}
+            {/* </ol> */}
+        {/* </Grid> */}
+        </List>
         </>
     )
 }
